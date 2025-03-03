@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "dgSpecHash": "asS5eCtBQac=",
+  "success": true,
+  "projectFilePath": "D:\\RiderProjects\\SwitchApp\\SwitchApp\\SwitchApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\fajer\\.nuget\\packages\\packetdotnet\\0.13.0\\packetdotnet.0.13.0.nupkg.sha512",
+    "C:\\Users\\fajer\\.nuget\\packages\\packetdotnet.pingman\\0.13.0\\packetdotnet.pingman.0.13.0.nupkg.sha512",
+    "C:\\Users\\fajer\\.nuget\\packages\\sharp_pcap\\4.2.0\\sharp_pcap.4.2.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'PacketDotNet 0.13.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "PacketDotNet",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'PacketDotNet.Pingman 0.13.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "PacketDotNet.Pingman",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Sharp_Pcap 4.2.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Sharp_Pcap",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    }
+  ]
+}

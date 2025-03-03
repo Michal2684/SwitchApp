@@ -1,0 +1,201 @@
+{
+  "version": 3,
+  "targets": {
+    "net9.0-windows7.0": {
+      "PacketDotNet/0.13.0": {
+        "type": "package",
+        "compile": {
+          "lib/net/PacketDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net/PacketDotNet.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "PacketDotNet.Pingman/0.13.0": {
+        "type": "package",
+        "compile": {
+          "lib/net451/PacketDotNet.dll": {}
+        },
+        "runtime": {
+          "lib/net451/PacketDotNet.dll": {}
+        }
+      },
+      "Sharp_Pcap/4.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/PacketDotNet.dll": {},
+          "lib/SharpPcap.dll": {}
+        },
+        "runtime": {
+          "lib/PacketDotNet.dll": {},
+          "lib/SharpPcap.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PacketDotNet/0.13.0": {
+      "sha512": "uxoebIuWxvHcMEfYKHgLyYvaYabM2UiDnr7zWV8vLRBJclr7xSqULSRQlSzCQ2YTkpAI5zB5oYVNEdbD3gewdA==",
+      "type": "package",
+      "path": "packetdotnet/0.13.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net/PacketDotNet.dll",
+        "lib/net/PacketDotNet.xml",
+        "packetdotnet.0.13.0.nupkg.sha512",
+        "packetdotnet.nuspec"
+      ]
+    },
+    "PacketDotNet.Pingman/0.13.0": {
+      "sha512": "No+VJ0XDfyoqorT9fH1HcujWzqDVNk2y+xVSyv/IZG/WSI/PmTyesk1kWQWbEYlo3Ovz4TwH9kHZ+enMFwN8Zg==",
+      "type": "package",
+      "path": "packetdotnet.pingman/0.13.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net451/PacketDotNet.dll",
+        "packetdotnet.pingman.0.13.0.nupkg.sha512",
+        "packetdotnet.pingman.nuspec"
+      ]
+    },
+    "Sharp_Pcap/4.2.0": {
+      "sha512": "TXQpXJPIgaPUohaNLgigt98FNG2pskOFH+bWhCOQdJzif3W9OzJ8quEGYZal540zmmLJ+Xiusf4bcHZLQmoiaQ==",
+      "type": "package",
+      "path": "sharp_pcap/4.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/PacketDotNet.dll",
+        "lib/PacketDotNet.xml",
+        "lib/SharpPcap.dll",
+        "lib/SharpPcap.dll.config",
+        "lib/SharpPcap.xml",
+        "sharp_pcap.4.2.0.nupkg.sha512",
+        "sharp_pcap.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net9.0-windows7.0": [
+      "PacketDotNet >= 0.13.0",
+      "PacketDotNet.Pingman >= 0.13.0",
+      "Sharp_Pcap >= 4.2.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\fajer\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\RiderProjects\\SwitchApp\\SwitchApp\\SwitchApp.csproj",
+      "projectName": "SwitchApp",
+      "projectPath": "D:\\RiderProjects\\SwitchApp\\SwitchApp\\SwitchApp.csproj",
+      "packagesPath": "C:\\Users\\fajer\\.nuget\\packages\\",
+      "outputPath": "D:\\RiderProjects\\SwitchApp\\SwitchApp\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\fajer\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net9.0-windows"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net9.0-windows7.0": {
+          "targetAlias": "net9.0-windows",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
+    },
+    "frameworks": {
+      "net9.0-windows7.0": {
+        "targetAlias": "net9.0-windows",
+        "dependencies": {
+          "PacketDotNet": {
+            "target": "Package",
+            "version": "[0.13.0, )"
+          },
+          "PacketDotNet.Pingman": {
+            "target": "Package",
+            "version": "[0.13.0, )"
+          },
+          "Sharp_Pcap": {
+            "target": "Package",
+            "version": "[4.2.0, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WindowsForms": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Users\\fajer\\.dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'PacketDotNet 0.13.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "PacketDotNet",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'PacketDotNet.Pingman 0.13.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "PacketDotNet.Pingman",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Sharp_Pcap 4.2.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Sharp_Pcap",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "SwitchApp/1.0.0": {
+        "dependencies": {
+          "PacketDotNet": "0.13.0",
+          "PacketDotNet.Pingman": "0.13.0",
+          "Sharp_Pcap": "4.2.0"
+        },
+        "runtime": {
+          "SwitchApp.dll": {}
+        }
+      },
+      "PacketDotNet/0.13.0": {
+        "runtime": {
+          "lib/net/PacketDotNet.dll": {
+            "assemblyVersion": "0.13.0.0",
+            "fileVersion": "0.13.0.0"
+          }
+        }
+      },
+      "PacketDotNet.Pingman/0.13.0": {},
+      "Sharp_Pcap/4.2.0": {
+        "runtime": {
+          "lib/SharpPcap.dll": {
+            "assemblyVersion": "4.2.0.0",
+            "fileVersion": "4.2.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SwitchApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PacketDotNet/0.13.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uxoebIuWxvHcMEfYKHgLyYvaYabM2UiDnr7zWV8vLRBJclr7xSqULSRQlSzCQ2YTkpAI5zB5oYVNEdbD3gewdA==",
+      "path": "packetdotnet/0.13.0",
+      "hashPath": "packetdotnet.0.13.0.nupkg.sha512"
+    },
+    "PacketDotNet.Pingman/0.13.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-No+VJ0XDfyoqorT9fH1HcujWzqDVNk2y+xVSyv/IZG/WSI/PmTyesk1kWQWbEYlo3Ovz4TwH9kHZ+enMFwN8Zg==",
+      "path": "packetdotnet.pingman/0.13.0",
+      "hashPath": "packetdotnet.pingman.0.13.0.nupkg.sha512"
+    },
+    "Sharp_Pcap/4.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TXQpXJPIgaPUohaNLgigt98FNG2pskOFH+bWhCOQdJzif3W9OzJ8quEGYZal540zmmLJ+Xiusf4bcHZLQmoiaQ==",
+      "path": "sharp_pcap/4.2.0",
+      "hashPath": "sharp_pcap.4.2.0.nupkg.sha512"
+    }
+  }
+}

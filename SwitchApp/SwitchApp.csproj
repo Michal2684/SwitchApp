@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net9.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWindowsForms>true</UseWindowsForms>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="PacketDotNet" Version="0.13.0" />
+      <PackageReference Include="PacketDotNet.Pingman" Version="0.13.0" />
+      <PackageReference Include="Sharp_Pcap" Version="4.2.0" />
+    </ItemGroup>
+
+</Project>
