@@ -10,7 +10,7 @@ namespace SwitchApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SwitchForm()); // Spustí hlavný formulár
+            Application.Run(new SwitchForm()); 
         }
     }
 }

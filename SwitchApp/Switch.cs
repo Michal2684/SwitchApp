@@ -39,25 +39,21 @@ public class Switch: IDisposable
 
     private void InitializePorts()
     {
-        // Získajte všetky dostupné zariadenia
         var allDevices = CaptureDeviceList.Instance
             .Cast<LibPcapLiveDevice>()
             .ToList();
-
-        // Debug výpis pre kontrolu
+        
         Console.WriteLine("Dostupné sieťové rozhrania:");
         foreach (var device in allDevices)
         {
             Console.WriteLine($"- {device.Description} ({device.Name})");
         }
-
-        // Filtrujte adaptéry podľa popisu (prispôsobte podľa vášho výpisu)
+        
         var usbAdapters = allDevices
             .Where(d => d.Description.Contains("Realtek USB GbE", StringComparison.OrdinalIgnoreCase))
             .Take(2)
             .ToList();
-
-        // Overte počet
+        
         if (usbAdapters.Count < 2)
         {
             throw new InvalidOperationException(
@@ -67,16 +63,14 @@ public class Switch: IDisposable
                 "3. Obsahuje popis adaptéra 'Realtek USB GbE'?"
             );
         }
-
-        // Priradenie portov
+        
         _port1 = usbAdapters[0];
         _port2 = usbAdapters[1];
 
         Console.WriteLine($"Vybrané porty:\n" +
                           $"Port 1: {_port1.Description}\n" +
                           $"Port 2: {_port2.Description}");
-
-        // Otvorenie portov
+        
         _port1.Open(DeviceMode.Promiscuous, 1000);
         _port2.Open(DeviceMode.Promiscuous, 1000);
     }
