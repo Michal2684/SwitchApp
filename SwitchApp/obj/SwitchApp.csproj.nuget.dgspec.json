@@ -55,6 +55,10 @@
             "Sharp_Pcap": {
               "target": "Package",
               "version": "[4.2.0, )"
+            },
+            "System.IO.Hashing": {
+              "target": "Package",
+              "version": "[9.0.2, )"
             }
           },
           "imports": [

@@ -12,6 +12,7 @@
       <PackageReference Include="PacketDotNet" Version="0.13.0" />
       <PackageReference Include="PacketDotNet.Pingman" Version="0.13.0" />
       <PackageReference Include="Sharp_Pcap" Version="4.2.0" />
+      <PackageReference Include="System.IO.Hashing" Version="9.0.2" />
     </ItemGroup>
 
 </Project>

@@ -10,7 +10,8 @@
         "dependencies": {
           "PacketDotNet": "0.13.0",
           "PacketDotNet.Pingman": "0.13.0",
-          "Sharp_Pcap": "4.2.0"
+          "Sharp_Pcap": "4.2.0",
+          "System.IO.Hashing": "9.0.2"
         },
         "runtime": {
           "SwitchApp.dll": {}
@@ -30,6 +31,14 @@
           "lib/SharpPcap.dll": {
             "assemblyVersion": "4.2.0.0",
             "fileVersion": "4.2.0.0"
+          }
+        }
+      },
+      "System.IO.Hashing/9.0.2": {
+        "runtime": {
+          "lib/net9.0/System.IO.Hashing.dll": {
+            "assemblyVersion": "9.0.0.2",
+            "fileVersion": "9.0.225.6610"
           }
         }
       }
@@ -61,6 +70,13 @@
       "sha512": "sha512-TXQpXJPIgaPUohaNLgigt98FNG2pskOFH+bWhCOQdJzif3W9OzJ8quEGYZal540zmmLJ+Xiusf4bcHZLQmoiaQ==",
       "path": "sharp_pcap/4.2.0",
       "hashPath": "sharp_pcap.4.2.0.nupkg.sha512"
+    },
+    "System.IO.Hashing/9.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OimMksgZG1QnnbIO4K3cEGac4lDkUfCqigDYxCieqKRIX59XANl0R+V9qmmsqxN1mbk/SAk7t4G0z2x0zR/D6Q==",
+      "path": "system.io.hashing/9.0.2",
+      "hashPath": "system.io.hashing.9.0.2.nupkg.sha512"
     }
   }
 }

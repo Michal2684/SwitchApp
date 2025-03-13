@@ -16,3 +16,5 @@ D:\RiderProjects\SwitchApp\SwitchApp\bin\Debug\net9.0-windows\PacketDotNet.dll
 D:\RiderProjects\SwitchApp\SwitchApp\bin\Debug\net9.0-windows\SharpPcap.dll
 D:\RiderProjects\SwitchApp\SwitchApp\obj\Debug\net9.0-windows\SwitchApp.csproj.AssemblyReference.cache
 D:\RiderProjects\SwitchApp\SwitchApp\obj\Debug\net9.0-windows\SwitchApp.csproj.Up2Date
+D:\RiderProjects\SwitchApp\SwitchApp\obj\Debug\net9.0-windows\SwitchApp.sourcelink.json
+D:\RiderProjects\SwitchApp\SwitchApp\bin\Debug\net9.0-windows\System.IO.Hashing.dll

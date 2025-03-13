@@ -1,136 +1,148 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
+using System.IO.Hashing;
 using System.Timers;
-using System.Security.Cryptography;
 using SharpPcap;
 using PacketDotNet;
 using SharpPcap.LibPcap;
 
-
 namespace SwitchApp;
 
-public class Switch: IDisposable
+public class Switch : IDisposable
 {
-    private readonly ConcurrentDictionary<string, DateTime> _sentFrames = new();
-    private readonly TimeSpan _frameTtl = TimeSpan.FromSeconds(1);
+    private readonly TimeSpan _frameTtl = TimeSpan.FromSeconds(5);
     private System.Timers.Timer _cleanupTimer;
-    
-    
+    private readonly ConcurrentDictionary<string, DateTime> _frameHashes = new();
+
     private readonly Dictionary<int, PortStats> _portStats = new()
     {
         { 1, new PortStats() },
         { 2, new PortStats() }
     };
+
+    public List<object> GetAvailableDevices()
+    {
+        var devices = CaptureDeviceList.Instance.Cast<LibPcapLiveDevice>().ToList();
+
+        var modifiedDevices = devices.Select(device => new
+        {
+            Device = device,
+            Description = device.Description.StartsWith("Network adapter")
+                ? device.Description.Substring("Network adapter".Length).Trim()
+                : device.Description
+        }).ToList();
+
+        return modifiedDevices.Cast<object>().ToList();
+    }
+
     public IReadOnlyDictionary<int, PortStats> PortStatistics => _portStats;
-    
+
     private LibPcapLiveDevice? _port1;
     private LibPcapLiveDevice? _port2;
-    
-    
+
     public void Start()
     {
-        InitializePorts();
-        InitializeTimers(); 
+        if (_port1 == null || _port2 == null)
+            throw new InvalidOperationException("Ports not initialized");
+
+        TimerInitialization();
         StartCapture(_port1);
         StartCapture(_port2);
-
     }
 
-    private void InitializePorts()
+    public void InitializePorts(LibPcapLiveDevice port1, LibPcapLiveDevice port2)
     {
-        var allDevices = CaptureDeviceList.Instance
-            .Cast<LibPcapLiveDevice>()
-            .ToList();
-        
-        Console.WriteLine("Dostupné sieťové rozhrania:");
-        foreach (var device in allDevices)
+        if (port1 == null || port2 == null)
         {
-            Console.WriteLine($"- {device.Description} ({device.Name})");
+            Console.WriteLine("Port1 is null: " + (port1 == null));
+            Console.WriteLine("Port2 is null: " + (port2 == null));
+            throw new ArgumentNullException("Both ports must be selected");
         }
-        
-        var usbAdapters = allDevices
-            .Where(d => d.Description.Contains("Realtek USB GbE", StringComparison.OrdinalIgnoreCase))
-            .Take(2)
-            .ToList();
-        
-        if (usbAdapters.Count < 2)
-        {
-            throw new InvalidOperationException(
-                "Nenašli sa 2 Realtek USB adaptéry. Skontrolujte:\n" +
-                "1. Sú adaptéry pripojené?\n" +
-                "2. Sú povolené v Sieťových pripojeniach?\n" +
-                "3. Obsahuje popis adaptéra 'Realtek USB GbE'?"
-            );
-        }
-        
-        _port1 = usbAdapters[0];
-        _port2 = usbAdapters[1];
 
-        Console.WriteLine($"Vybrané porty:\n" +
-                          $"Port 1: {_port1.Description}\n" +
-                          $"Port 2: {_port2.Description}");
-        
-        _port1.Open(DeviceMode.Promiscuous, 1000);
-        _port2.Open(DeviceMode.Promiscuous, 1000);
+        if (port1.Name == port2.Name)
+            throw new ArgumentException("Cannot use the same interface for both ports");
+
+        _port1 = port1;
+        _port2 = port2;
+
+        Console.WriteLine($"Selected ports:\nPort 1: {_port1.Description}\nPort 2: {_port2.Description}");
+        _port1.Open(DeviceMode.Promiscuous, 100);
+        _port2.Open(DeviceMode.Promiscuous, 100);
     }
 
-    private void InitializeTimers()
+    private void TimerInitialization()
     {
         _cleanupTimer = new System.Timers.Timer(1000);
-        _cleanupTimer.Elapsed += (_,_) => CleanupOldFrames();
+        _cleanupTimer.Elapsed += (_, _) => RemoveFrames();
         _cleanupTimer.Start();
     }
 
-    private void CleanupOldFrames()
+    private void RemoveFrames()
     {
-        var cutoff = DateTime.Now - _frameTtl;
-        foreach (var hash in _sentFrames.Where(kv => kv.Value < cutoff).Select(kv => kv.Key).ToList())
+        var now = DateTime.Now;
+        var expiredHashes = _frameHashes.Where(kv => now - kv.Value > _frameTtl)
+                                        .Select(kv => kv.Key)
+                                        .ToList();
+        
+        foreach (var hash in expiredHashes)
         {
-            _sentFrames.TryRemove(hash, out _);
+            _frameHashes.TryRemove(hash, out _);
         }
     }
-    
+
     private void StartCapture(LibPcapLiveDevice device)
     {
-        device.OnPacketArrival += (s, e) => 
+        device.OnPacketArrival += (s, e) =>
         {
-            var rawPacket = e.Packet; 
+            var rawPacket = e.Packet;
             if (rawPacket != null)
             {
-                ProcessPacket(rawPacket, device);
+                ProcessPacketStream(rawPacket, device);
             }
         };
         device.StartCapture();
     }
-    private void ProcessPacket(RawCapture rawPacket, LibPcapLiveDevice ingressPort)
+
+    private string ComputePacketHash(RawCapture rawPacket)
     {
-        Console.WriteLine($"Paket prijatý na porte {(ingressPort == _port1 ? 1 : 2)}");
-        var hash = ComputeHash(rawPacket.Data);
+        if (rawPacket.Data == null || rawPacket.Data.Length == 0)
+            return string.Empty;
+
+        var crc = new Crc32();
+        crc.Append(rawPacket.Data);
+        return Convert.ToHexString(crc.GetCurrentHash());
+    }
+    private void ProcessPacketStream(RawCapture rawPacket, LibPcapLiveDevice entryPort)
+    {
+        Console.WriteLine($"Paket prijatý na porte {(entryPort == _port1 ? 1 : 2)}");
+        
+        var packetHash = ComputePacketHash(rawPacket);
+        if (_frameHashes.ContainsKey(packetHash))
+        {
+            Console.WriteLine("Duplicate packet detected, dropping.");
+            return;
+        }
+        
+        _frameHashes.TryAdd(packetHash, DateTime.Now);
+
         var packet = Packet.ParsePacket(rawPacket.LinkLayerType, rawPacket.Data);
         if (packet == null) return;
         
-        if (_sentFrames.ContainsKey(hash))
-        {
-            var protocol = ProtocolDetector.Detect(packet);
-            var portNumber = ingressPort == _port1 ? 1 : 2;
-            UpdateStats(portNumber, protocol, isIncoming: true);
-            return;
-        }
-            
-        
-        ForwardPacket(packet, ingressPort);
-        
-    }
-    private void ForwardPacket(Packet packet, LibPcapLiveDevice ingressPort)
-    {
-        //var eth = packet.Extract<EthernetPacket>();
-        
-        FloodPorts(packet, ingressPort);
-        
+        var protocol = ProtocolDetector.Detect(packet);
+        var portNumber = entryPort == _port1 ? 1 : 2;
+        UpdateStats(portNumber, protocol, isIncoming: true);
+
+        ForwardPacketStream(packet, entryPort);
     }
 
-    private void FloodPorts(Packet packet, LibPcapLiveDevice ingressPort)
+    private void ForwardPacketStream(Packet packet, LibPcapLiveDevice ingressPort)
+    {
+        FloodAllPorts(packet, ingressPort);
+    }
+
+    private void FloodAllPorts(Packet packet, LibPcapLiveDevice ingressPort)
     {
         foreach (var port in new[] { _port1, _port2 }.Where(p => p != ingressPort))
         {
@@ -138,39 +150,32 @@ public class Switch: IDisposable
         }
     }
 
-
     private void SendPacket(Packet packet, LibPcapLiveDevice port)
     {
         try
         {
-            var data = packet.Bytes;
-            var hash = ComputeHash(data);
-            
             port.SendPacket(packet.Bytes);
-            
-            if (_sentFrames.TryAdd(hash, DateTime.Now))
-            {
-                var protocol = ProtocolDetector.Detect(packet);
-                var portNumber = port == _port1 ? 1 : 2;
-                UpdateStats(portNumber, protocol, isIncoming: false);
-            }
+
+            var protocol = ProtocolDetector.Detect(packet);
+            var portNumber = port == _port1 ? 1 : 2;
+            UpdateStats(portNumber, protocol, isIncoming: false);
         }
-        catch (Exception e){Console.WriteLine($"Chyba: {e.Message}"); }   
-        
-    }
-    
-    private string ComputeHash(byte[] data)
-    {
-        return BitConverter.ToString(data, 0, Math.Min(8, data.Length)).Replace("-", "");
+        catch (Exception e) { Console.WriteLine($"Chyba: {e.Message}"); }
     }
 
     private void UpdateStats(int port, string protocol, bool isIncoming)
     {
         var stats = isIncoming ? _portStats[port].In : _portStats[port].Out;
-        stats[protocol] = stats.TryGetValue(protocol, out var count) ? count + 1 : 1;
-        
+        if (stats.TryGetValue(protocol, out var count))
+        {
+            stats[protocol] = count + 1;
+        }
+        else
+        {
+            stats[protocol] = 1;
+        }
     }
-    
+
     public void ResetStats()
     {
         foreach (var port in _portStats.Values)
@@ -178,32 +183,27 @@ public class Switch: IDisposable
             port.In.Clear();
             port.Out.Clear();
         }
+        _frameHashes.Clear();
     }
-    
+
     public void Dispose()
     {
-        _cleanupTimer.Stop();
-        _cleanupTimer.Dispose();
-        _port1.StopCapture();
-        _port2.StopCapture();
+        _cleanupTimer?.Stop();
+        _cleanupTimer?.Dispose();
+
+        if (_port1 != null)
+        {
+            _port1.StopCapture();
+            _port1.Close();
+        }
+
+        if (_port2 != null)
+        {
+            _port2.StopCapture();
+            _port2.Close();
+        }
+
+        _port1 = null;
+        _port2 = null;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -30,7 +30,7 @@ public static class ProtocolDetector
         }
         else
         {
-            return "Ethernet II"; 
+            return "EthernetII"; 
         }
         
         if (protocol == IPProtocolType.ICMP || (isIpv6 && protocol == IPProtocolType.ICMPV6))
