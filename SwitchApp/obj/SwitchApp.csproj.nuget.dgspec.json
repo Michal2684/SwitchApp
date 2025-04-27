@@ -44,6 +44,10 @@
         "net9.0-windows7.0": {
           "targetAlias": "net9.0-windows",
           "dependencies": {
+            "BindingListLibrary": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "PacketDotNet": {
               "target": "Package",
               "version": "[0.13.0, )"

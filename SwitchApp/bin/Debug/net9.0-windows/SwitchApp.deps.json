@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "SwitchApp/1.0.0": {
         "dependencies": {
+          "BindingListLibrary": "1.0.0",
           "PacketDotNet": "0.13.0",
           "PacketDotNet.Pingman": "0.13.0",
           "Sharp_Pcap": "4.2.0",
@@ -15,6 +16,14 @@
         },
         "runtime": {
           "SwitchApp.dll": {}
+        }
+      },
+      "BindingListLibrary/1.0.0": {
+        "runtime": {
+          "lib/net5.0-windows7.0/BindingListLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "PacketDotNet/0.13.0": {
@@ -49,6 +58,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "BindingListLibrary/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-C/8Y8pijMOV6nNktmTpoNXm6nUOjbXEObK9zKnZR0hqQe1edgB8XRxoijvPUHuZH7hJXL6f6EQL2wU8eWNfhPQ==",
+      "path": "bindinglistlibrary/1.0.0",
+      "hashPath": "bindinglistlibrary.1.0.0.nupkg.sha512"
     },
     "PacketDotNet/0.13.0": {
       "type": "package",

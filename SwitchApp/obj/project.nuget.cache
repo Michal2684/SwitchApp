@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "vWvJJ1svfHc=",
+  "dgSpecHash": "uXPn7sLbJaM=",
   "success": true,
   "projectFilePath": "D:\\RiderProjects\\SwitchApp\\SwitchApp\\SwitchApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\fajer\\.nuget\\packages\\bindinglistlibrary\\1.0.0\\bindinglistlibrary.1.0.0.nupkg.sha512",
     "C:\\Users\\fajer\\.nuget\\packages\\packetdotnet\\0.13.0\\packetdotnet.0.13.0.nupkg.sha512",
     "C:\\Users\\fajer\\.nuget\\packages\\packetdotnet.pingman\\0.13.0\\packetdotnet.pingman.0.13.0.nupkg.sha512",
     "C:\\Users\\fajer\\.nuget\\packages\\sharp_pcap\\4.2.0\\sharp_pcap.4.2.0.nupkg.sha512",

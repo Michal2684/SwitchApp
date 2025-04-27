@@ -18,3 +18,4 @@ D:\RiderProjects\SwitchApp\SwitchApp\obj\Debug\net9.0-windows\SwitchApp.csproj.A
 D:\RiderProjects\SwitchApp\SwitchApp\obj\Debug\net9.0-windows\SwitchApp.csproj.Up2Date
 D:\RiderProjects\SwitchApp\SwitchApp\obj\Debug\net9.0-windows\SwitchApp.sourcelink.json
 D:\RiderProjects\SwitchApp\SwitchApp\bin\Debug\net9.0-windows\System.IO.Hashing.dll
+D:\RiderProjects\SwitchApp\SwitchApp\bin\Debug\net9.0-windows\BindingListLibrary.dll

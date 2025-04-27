@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="BindingListLibrary" Version="1.0.0" />
       <PackageReference Include="PacketDotNet" Version="0.13.0" />
       <PackageReference Include="PacketDotNet.Pingman" Version="0.13.0" />
       <PackageReference Include="Sharp_Pcap" Version="4.2.0" />

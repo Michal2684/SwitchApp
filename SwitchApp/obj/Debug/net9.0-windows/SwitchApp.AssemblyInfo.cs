@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SwitchApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9172f5250e017823aae5d9b031cb7364be97e986")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b78dc5cc28505888e652858d182911b00a9fe385")]
 [assembly: System.Reflection.AssemblyProductAttribute("SwitchApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SwitchApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
